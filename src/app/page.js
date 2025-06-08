@@ -5,15 +5,24 @@ export default function Home() {
   const router = useRouter()
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center">
-      <h1 className="text-4xl font-bold mb-6">起床</h1>
-      <img src="/images/sleep.png" alt="sleep icon" className="w-32 h-32 mb-4" />
-      <button
-        className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition"
-        onClick={() => router.push('/game')}
-      >
-        開始遊戲
-      </button>
+    <div 
+      className="relative w-full h-screen"
+      style={{
+        backgroundImage: 'url(/images/background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="relative h-full flex flex-col items-center justify-center">
+        <h1 className="text-10xl font-bold text-white mb-8">不要睡著大挑戰</h1>
+        <button
+          className="bg-blue-500 text-white px-8 rounded-full text-xl font-bold hover:bg-blue-600 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+          onClick={() => router.push('/game')}
+        >
+          開始遊戲
+        </button>
+      </div>
     </div>
   )
 }

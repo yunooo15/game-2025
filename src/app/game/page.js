@@ -2,13 +2,19 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import SleepBar from '@/components/SleepBar.js'
-import SleepButton from '@/components/SleepButton.js'
 
 export default function Game() {
   const [sleepLevel, setSleepLevel] = useState(0)
   const [isAwake, setIsAwake] = useState(false)
   const [time, setTime] = useState(0)
+  const [isScaling, setIsScaling] = useState(false)
   const router = useRouter()
+
+  const handleWakeUp = () => {
+    setSleepLevel(prev => Math.max(prev - 5, 0))
+    setIsScaling(true)
+    setTimeout(() => setIsScaling(false), 300)
+  }
 
   useEffect(() => {
     if (isAwake) return
@@ -27,7 +33,7 @@ export default function Game() {
 
     const keyHandler = (e) => {
       if (e.code === 'Space') {
-        setSleepLevel(prev => Math.max(prev - 5, 0))
+        handleWakeUp()
       }
     }
 
@@ -47,24 +53,25 @@ export default function Game() {
   }, [isAwake])
 
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-center text-center">
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="/images/alarm.png" 
-          alt="alarm" 
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="relative z-10 bg-white/80 p-8 rounded-lg shadow-lg flex flex-col items-center">
-        <h2 className="text-2xl font-bold mb-4">小鬼，不要打瞌睡！</h2>
+    <div 
+      className="flex flex-col items-center justify-center h-screen text-center relative"
+      style={{
+        backgroundImage: 'url(/images/background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="bg-white/80 rounded-lg shadow-lg flex flex-col items-center px-8 py-12">
+        <h2 className="text-2xl font-bold mb-8">小鬼，不要打瞌睡！</h2>
         <SleepBar value={sleepLevel} />
         <button
-          className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition mt-4"
-          onClick={() => setSleepLevel(prev => Math.max(prev - 5, 0))}
+          className={`bg-transparent transition-transform duration-70 mt-8 ${isScaling ? 'scale-110' : 'scale-100'}`}
+          onClick={handleWakeUp}
         >
-          打瞌睡
+          <img src="/images/sleepman.png" alt="sleepman" className="w-[360px] " />
         </button>
-        <p className="mt-4 text-gray-500">按空白鍵或點擊讓自己醒著</p>
+        <p className="mt-8 text-gray-500">按空白鍵或點擊人物讓自己醒著</p>
       </div>
     </div>
   )

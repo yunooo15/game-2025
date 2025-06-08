@@ -7,16 +7,26 @@ export default function Result() {
   const router = useRouter()
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center">
-      <h1 className="text-4xl font-bold mb-4">你醒來了！</h1>
-      <img src="/images/wakeup.png" alt="wake up" className="w-32 h-32 mb-4" />
-      <p className="text-lg mb-4">你撐過了 <strong>{time}</strong> 秒</p>
-      <button
-        className="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition"
-        onClick={() => router.push('/')}
-      >
-        再玩一次
-      </button>
+    <div 
+      className="flex flex-col items-center justify-center h-screen text-center relative"
+      style={{
+        backgroundImage: 'url(/images/background.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="bg-white/80 p-8 rounded-lg shadow-lg">
+        {/* <h1 className="text-4xl font-bold mb-4">你醒來了！</h1> */}
+        <p className="text-lg mb-8">你撐過了 <strong>{time}</strong> 秒</p>
+        <img src="/images/teacher.png" alt="teacher" className="w-[480px] mb-8" />
+        <button
+          className="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+          onClick={() => router.push('/')}
+        >
+          Again
+        </button>
+      </div>
     </div>
   )
 }
