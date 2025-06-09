@@ -1,7 +1,8 @@
 'use client'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { Suspense } from 'react'
 
-export default function Result() {
+function ResultContent() {
   const searchParams = useSearchParams()
   const time = searchParams.get('time')
   const router = useRouter()
@@ -34,5 +35,13 @@ export default function Result() {
         </button>
       </div>
     </div>
+  )
+}
+
+export default function Result() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResultContent />
+    </Suspense>
   )
 }
