@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 
 export const metadata = {
-  title: '我不要起床',
+  title: '不要睡覺大挑戰',
   description: '打瞌睡點擊遊戲',
 }
 
